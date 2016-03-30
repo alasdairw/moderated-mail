@@ -16,9 +16,16 @@ class CreateEmailsTable extends Migration
             $table->increments('id');
             $table->string('subject');
             $table->string('to');
+            $table->string('from');
+            $table->string('recipient');
+            $table->string('sender');
+            $table->string('message_id');
+            $table->string('reply_to_message_id');
+            $table->date('date');
             $table->string('cc')->nullable();
             $table->string('bcc')->nullable();
-            $table->text('body');
+            $table->text('body_html');
+            $table->text('body_plain');
             $table->integer('reply_to_id')->nullable();
             $table->text('additional_headers')->nullable();
             $table->enum('direction',['Sent','Recieved']);
