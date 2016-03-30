@@ -15,6 +15,11 @@
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
+    Route::post('/inbound', 'InboundController@recieve');
+});
+
+
+Route::group(['middleware' => ['web','auth']], function () {
     Route::get('/', 'InboxController@index');
     Route::get('/inbox', 'InboxController@index');
     Route::get('/inbox/message/{emails}', 'InboxController@read');
@@ -25,4 +30,3 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/moderate/read', 'ModerationController@read');
     Route::post('/moderate/moderate/{emails}', 'ModerationController@moderate');
 });
-Route::post('/inbound', 'InboundController@recieve');
