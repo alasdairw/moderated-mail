@@ -24,8 +24,8 @@ class InboundController extends Controller
                 'recipient'  => $request->recipient,
                 'message_id'  => $request->message_id,
                 'reply_to_message_id'  => $request->reply_to_message_id,
-                'body_html' => $request->body-html,
-                'body_text' => $request->body-text,
+                'body_html' => $request->{body-html},
+                'body_text' => $request->{body-text},
                 'direction' => 'Recieved',
                 'moderation_status' => 'Queued',
                 'additional_headers' => $request->message-headers
