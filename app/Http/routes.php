@@ -24,5 +24,5 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/moderate', 'ModerationController@index');
     Route::get('/moderate/read', 'ModerationController@read');
     Route::post('/moderate/moderate/{emails}', 'ModerationController@moderate');
-    Route::post('/inbound', 'InboundController@recieve');
 });
+Route::post('/inbound', 'InboundController@recieve');

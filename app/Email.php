@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use Carbon\Carbon;
 
 class Email extends Model
 {
@@ -16,6 +17,8 @@ class Email extends Model
      * @var array
      */
     protected $dates = ['deleted_at','date'];
+
+    protected $guarded = ['id','created_at','updated_at','deleted_at'];
 
 
      /**

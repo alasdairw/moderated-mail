@@ -20,8 +20,8 @@ class CreateEmailsTable extends Migration
             $table->string('recipient');
             $table->string('sender');
             $table->string('message_id');
-            $table->string('reply_to_message_id');
-            $table->date('date');
+            $table->string('reply_to_message_id')->nullable();
+            $table->datetime('date');
             $table->string('cc')->nullable();
             $table->string('bcc')->nullable();
             $table->text('body_html');
@@ -31,10 +31,9 @@ class CreateEmailsTable extends Migration
             $table->enum('direction',['Sent','Recieved']);
             $table->enum('moderation_status',['Queued','Accepted','Rejected'])->default('Queued');
             $table->text('rejection_reason');
-            $table->integer('moderated_by')->unsigned();
+            $table->integer('moderated_by')->unsigned()->nullable();
             $table->softDeletes();
             $table->timestamps();
-            $table->foreign('moderated_by')->references('id')->on('users');
             $table->index('direction');
             $table->index('moderation_status');
             $table->index('reply_to_id');
