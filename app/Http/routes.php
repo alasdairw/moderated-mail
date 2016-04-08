@@ -16,17 +16,23 @@
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
     Route::post('/inbound', 'InboundController@recieve');
+    Route::get('/inbox/data', 'InboxController@raw_inbox_data');
+    Route::get('email/new', function() {
+        $email = \App\Email::fake_new_approved_email();
+        return $email;
+    });
 });
 
 
 Route::group(['middleware' => ['web','auth']], function () {
     Route::get('/', 'InboxController@index');
     Route::get('/inbox', 'InboxController@index');
-    Route::get('/inbox/message/{emails}', 'InboxController@read');
+    Route::get('/inbox/dummy', 'InboxController@read');
+    Route::get('/inbox/message/{message}', 'InboxController@read');
     Route::get('/compose', 'ComposerController@compose');
     Route::get('/drafts', 'ComposerController@index');
-    Route::get('/drafts/message/{drafts}', 'ComposerController@drafts');
+    Route::get('/drafts/message/{draft}', 'ComposerController@drafts');
     Route::get('/moderate', 'ModerationController@index');
     Route::get('/moderate/read', 'ModerationController@read');
-    Route::post('/moderate/moderate/{emails}', 'ModerationController@moderate');
+    Route::post('/moderate/moderate/{message}', 'ModerationController@moderate');
 });

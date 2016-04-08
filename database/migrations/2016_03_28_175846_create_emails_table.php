@@ -28,6 +28,10 @@ class CreateEmailsTable extends Migration
             $table->text('body_plain');
             $table->integer('reply_to_id')->nullable();
             $table->text('additional_headers')->nullable();
+            $table->boolean('is_read')->defaul(false);
+            $table->boolean('is_replied')->defaul(false);
+            $table->boolean('is_forwarded')->defaul(false);
+            $table->boolean('is_starred')->defaul(false);
             $table->enum('direction',['Sent','Recieved']);
             $table->enum('moderation_status',['Queued','Accepted','Rejected'])->default('Queued');
             $table->text('rejection_reason');

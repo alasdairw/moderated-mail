@@ -13,7 +13,7 @@ use Carbon\Carbon;
 class InboundController extends Controller
 {
     //
-    public function recieve(EmailRequest $request)
+    public function recieve(Request $request)
     {
         Log::info('request recieved: ',$request->toArray()); 
         $email = Email::create([
