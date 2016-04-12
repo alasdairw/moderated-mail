@@ -169,11 +169,20 @@
         $this.toggleClass("fa-star-o");
       }
     });
-  });
-  var socket = io.connect('http://dougmail.app:6001');
-  console.log(socket);
+   });
+ 
 </script>
 <script src="/socket.io/socket.io.js"></script>
+<script>
+  
+  console.log('setting up listener');
+  var app = app || {};
+  app.listener = io.connect('http://dougmail.app:6001');
+  
+
+
+</script>
+
 <script type="text/jsx">
 
   var EmailData = React.createClass({
@@ -199,10 +208,10 @@
                 }
             },
             componentDidMount: function() {
-            socket.on('approved-email',this._newEmail)
-            console.log(this.props.source);
+              console.log('didmount, binding socket');
+              app.listener.on('approved-email:App\\Events\\NewEmail',this._newEmail)
               this.serverRequest = $.get(this.props.source, function (result) {
-                console.log(result);
+                //console.log(result);
                 this.setState({
                   emails: result
                 });
@@ -210,9 +219,9 @@
             },
             _newEmail: function(email)
             {
-              console.log('new email');
+              //console.log('new email'+email);
               this.setState({
-                emails: this.state.emails.concat(email)
+                emails: this.state.emails.concat(email.email)
               })
               
             },
